@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import {brands} from '../data/brand_db';
 
 export default class ServiceCardScreen extends Component {
   constructor(props) {
@@ -10,9 +11,17 @@ export default class ServiceCardScreen extends Component {
 
   render() {
     return (
-      <View>
-        <Text> ServiceCardScreen </Text>
+      <View style={styles.container}>
+        <ScrollView>
+          {brands.map((brand, index) => <Text>{brand.name}</Text>)}
+        </ScrollView>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center'
+  }
+})
