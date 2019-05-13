@@ -1,71 +1,137 @@
 import React, { Component } from 'react';
-import { View, Text, Picker } from 'react-native';
+import { View, Text, Picker, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default class ProfileScreen extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props);
     this.state = {
-      brandAuto: null,
-      modelAuto: null,
-      options: [
+      renderSecondPicker: false,
+      selectedBrand: '',
+      selectedModel: '',
+      modelsByBrand: [],
+      check: false,
+      vata: '',
+      brands: [
         {
-          label: 'Toyota',
-          value: 'Toyota',
-          key: 'Toyota-key',
-          dynamicValues: [
-            {
-              label: 'Camry',
-              value: 'Camry',
-              key: 'Camry-key',
-            },
-            {
-              label: 'Land Cruizer',
-              value: 'Land Cruizer',
-              key: 'Land Cruizer-key',
-            }
-          ]
+          "id": 1,
+          "name": "Nissan"
         },
         {
-          label: 'Nissan',
-          value: 'Nissan',
-          key: 'Nissan-key',
-          dynamicValues: [
-            {
-              label: 'Pathfinder',
-              value: 'Pathfinder',
-              key: 'Pathfinder-key',
-            },
-            {
-              label: 'X-Trail',
-              value: 'X-Trail',
-              key: 'X-Trail-key',
-            }
-          ]
+          "id": 2,
+          "name": "Toyota"
+        },
+      ],
+      ToyotaModels: [
+        {
+          "name": "camry"
+        },
+        {
+          "name": "jopa"
+        }
+      ],
+      NissanModels: [
+        {
+          "name": "juke"
+        },
+        {
+          "name": "hui"
         }
       ]
+
+    };
+  }
+
+  yourfunc = (itemValue, itemIndex) => {
+    //doing some stuff to change another picker
+    //let modelsByBrand = this.state.models.find(item => item.brand_id === itemValue).name;
+    //let lastname = //get lastname from val
+    //and then this.setState lastname
+    this.setState({ selectedBrand: itemValue });
+    /*
+        this.setState({
+          modelsByBrand: this.state.models.find(item =>
+            item.brand_id == itemValue)
+        });
+    */
+    if (itemValue == 2) {
+      this.setState({
+        modelsByBrand: this.state.ToyotaModels
+      })
     }
+    else if (itemValue == 1) {
+      this.setState({
+        modelsByBrand: this.state.NissanModels
+      })
+    }
+
+  }
+
+  check = () => {
+    //alert(this.state.modelsByBrand)
+    alert(JSON.stringify(this.state.modelsByBrand, null, 4))
+  }
+
+  renderModelPicker() {
+    return (
+      <Picker
+        selectedValue={this.state.selectedModel}
+        style={styles.input}>
+        {
+          
+          this.state.modelsByBrand.map((item, key) => (
+            <Picker.Item label={item.name} value={item.id} key={key} />)
+          )
+          
+        }
+      </Picker>
+    )
   }
 
   render() {
-    const { options, brandAuto, modelAuto } = this.state
-
     return (
       <View>
-        <Picker brandAuto={brandAuto} onValueChange={(value) => { this.setState({ brandAuto: value }) }}>
-          {options.map(option => <Picker.Item key={`${option.key}`} label={`${option.label}`} value={`${option.value}`} />)}
+        <Picker
+          selectedValue={this.state.selectedBrand}
+          style={styles.input}
+          onValueChange={(itemValue, itemIndex) =>
+            //this.setState({ brandAuto: itemValue })
+            this.yourfunc(itemValue, itemIndex)
+          }>
+          {
+            this.state.brands.map((item, key) => (
+              <Picker.Item label={item.name} value={item.id} key={key} />)
+            )
+          }
         </Picker>
 
-        {brandAuto ?
-          <Picker brandAuto={modelAuto} onValueChange={(value) => { this.setState({ modelAuto: value }) }}>
-            {options.filter(option => brandAuto === option.value)
-              .map(option => option.dynamicValues.map(dynamicOption =>
-                <Picker.Item key={`${dynamicOption.key}`} label={`${dynamicOption.label}`} value={`${dynamicOption.value}`} />
-              ))
-            }
-          </Picker> :
-          <View />
-        }
+
+        {!this.renderSecondPicker && this.renderModelPicker()}
+
+        <Picker
+          selectedValue={this.state.vata}
+          style={styles.input}>
+          {
+            //<Picker.Item label={JSON.stringify(this.state.modelsByBrand.name)} value={JSON.stringify(this.state.modelsByBrand.name)} />
+            <Picker.Item label={JSON.stringify(this.state.modelsByBrand, null, 4)} value="123" key="123" />
+          }
+        </Picker>
+
+
+        <TouchableOpacity onPress={this.check}>
+          <Text style={styles.btnText}>check</Text>
+        </TouchableOpacity>
       </View>
-    )
+    );
   }
 }
+
+
+const styles = StyleSheet.create({
+  input: {
+    alignItems: 'center',
+  },
+  btnText: {
+    fontSize: 20,
+    color: 'green',
+  }
+})
