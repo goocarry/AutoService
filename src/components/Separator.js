@@ -4,13 +4,16 @@ import { StyleSheet, View } from 'react-native'
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    marginTop: 5,
   },
   separatorOffset: {
-    flex: 2,
+    //flex: 2,
+    flex: 1,
     flexDirection: 'row',
   },
   separator: {
-    flex: 8,
+    //flex: 8,
+    flex: 1,
     flexDirection: 'row',
     borderColor: '#EDEDED',
     borderWidth: 0.8,

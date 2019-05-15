@@ -6,6 +6,7 @@ import {
     FlatList,
     TouchableHighlight
 } from 'react-native';
+import Separator from '../components/Separator';
 import { autoservices } from '../data/autoservice_db';
 
 export default class App extends Component {
@@ -25,10 +26,11 @@ export default class App extends Component {
                     data={this.state.autoservices}
                     showsVerticalScrollIndicator={true}
                     renderItem={({ item }) =>
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('Details')}>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('Details', {item: item.name})}>
                             <View style={styles.flatview}>
                                 <Text style={styles.name}>{item.name}</Text>
                                 <Text style={styles.email}>{item.address}</Text>
+                                <Separator />
                             </View>
                         </TouchableHighlight>
                     }
