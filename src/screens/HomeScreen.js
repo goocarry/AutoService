@@ -25,7 +25,7 @@ export default class App extends Component {
                     data={this.state.users}
                     showsVerticalScrollIndicator={true}
                     renderItem={({ item }) =>
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('ProfileTab')}>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('Details')}>
                             <View style={styles.flatview}>
                                 <Text style={styles.name}>{item.name}</Text>
                                 <Text style={styles.email}>{item.email}</Text>

@@ -6,16 +6,23 @@ import AuthLoadingScreen from './src/screens/AuthLoadingScreen';
 import ChatScreen from './src/screens/ChatScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import ServiceCardScreen from './src/screens/ServiceCardScreen';
+import DetailsScreen from './src/screens/DetailsScreen';
 
 //const AppStack = createStackNavigator({ Home: HomeScreen });
 const AuthStack = createStackNavigator({ Login: LoginScreen });
+
+const HomeTabStack = createStackNavigator({ 
+  HomeTab: HomeScreen,
+  Details: DetailsScreen
+})
 
 const AppStack = createStackNavigator(
   {
     Home: { 
         screen: createBottomTabNavigator(
              {
-               HomeTab: {screen: HomeScreen},
+               //HomeTab: {screen: HomeScreen},
+               HomeTab: {screen: HomeTabStack},
                ServiceCardTab: {screen: ServiceCardScreen},
                ChatTab: {screen: ChatScreen},
                ProfileTab: {screen: ProfileScreen},
