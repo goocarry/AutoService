@@ -6,7 +6,7 @@ import {
     FlatList,
     TouchableHighlight
 } from 'react-native';
-import { users } from '../data/users_db';
+import { autoservices } from '../data/autoservice_db';
 
 export default class App extends Component {
 
@@ -15,24 +15,24 @@ export default class App extends Component {
     }
 
     state = {
-        users: users
+        autoservices: autoservices
     }
 
     render() {
         return (
             <View style={styles.container} >
                 <FlatList
-                    data={this.state.users}
+                    data={this.state.autoservices}
                     showsVerticalScrollIndicator={true}
                     renderItem={({ item }) =>
                         <TouchableHighlight onPress={() => this.props.navigation.navigate('Details')}>
                             <View style={styles.flatview}>
                                 <Text style={styles.name}>{item.name}</Text>
-                                <Text style={styles.email}>{item.email}</Text>
+                                <Text style={styles.email}>{item.address}</Text>
                             </View>
                         </TouchableHighlight>
                     }
-                    keyExtractor={item => item.email}
+                    keyExtractor={item => item.name}
                 />
             </View>
         );
