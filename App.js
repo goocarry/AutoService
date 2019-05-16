@@ -7,6 +7,7 @@ import ChatScreen from './src/screens/ChatScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import ServiceCardScreen from './src/screens/ServiceCardScreen';
 import DetailsScreen from './src/screens/DetailsScreen';
+import PriceHelperScreen from './src/screens/PriceHelper';
 
 //const AppStack = createStackNavigator({ Home: HomeScreen });
 const AuthStack = createStackNavigator({ Login: LoginScreen });
@@ -26,6 +27,7 @@ const AppStack = createStackNavigator(
                ServiceCardTab: {screen: ServiceCardScreen},
                ChatTab: {screen: ChatScreen},
                ProfileTab: {screen: ProfileScreen},
+               PriceHelperTab: {screen: PriceHelperScreen}
              },{
                 tabBarPosition: "bottom"
              })
