@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Picker, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Picker, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native';
 import User from '../User';
 
 export default class ProfileScreen extends Component {

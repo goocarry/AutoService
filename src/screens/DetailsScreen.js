@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default class DetailsScreen extends Component {
     constructor(props) {
@@ -9,20 +9,48 @@ export default class DetailsScreen extends Component {
 
     }
 
-    check = () => {
+    showFrontSideServices = () => {
         //const item = this.props.navigation.getParam(item);
         const {params} = this.props.navigation.state;
-        alert(params.item);
+        //alert(params.item.name);
+        alert(JSON.stringify(params.item.frontSideServices));
+    }
+
+    showBackSideServices = () => {
+        //const item = this.props.navigation.getParam(item);
+        const {params} = this.props.navigation.state;
+        //alert(params.item.name);
+        alert(JSON.stringify(params.item.backSideServices));
+    }
+
+    showMotorServices = () => {
+        //const item = this.props.navigation.getParam(item);
+        const {params} = this.props.navigation.state;
+        //alert(params.item.name);
+        alert(JSON.stringify(params.item.motorServices));
     }
 
     render() {
+        const {params} = this.props.navigation.state;
         return (
-            <View>
-                <Text> DetailsScreen </Text>
-                <TouchableOpacity onPress={this.check}>
-                    <Text>check</Text>
+            <View style={styles.container}>
+                <Text>{params.item.name}</Text>
+                <TouchableOpacity onPress={this.showFrontSideServices}>
+                    <Text>Ремонт передней подвески</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.showBackSideServices}>
+                    <Text>Ремонт задней подвески</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.showMotorServices}>
+                    <Text>Ремонт ДВС</Text>
                 </TouchableOpacity>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        alignItems: 'center'
+    }
+})

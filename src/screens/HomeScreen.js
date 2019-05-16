@@ -26,7 +26,7 @@ export default class App extends Component {
                     data={this.state.autoservices}
                     showsVerticalScrollIndicator={true}
                     renderItem={({ item }) =>
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('Details', {item: item.name})}>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('Details', {item: item})}>
                             <View style={styles.flatview}>
                                 <Text style={styles.name}>{item.name}</Text>
                                 <Text style={styles.email}>{item.address}</Text>
