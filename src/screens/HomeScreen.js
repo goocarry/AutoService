@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     },
     flatview: {
         marginLeft: 20,
+        marginRight: 20,
         paddingTop: 20,
         borderRadius: 2,
     },

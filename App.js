@@ -8,13 +8,19 @@ import ProfileScreen from './src/screens/ProfileScreen';
 import ServiceCardScreen from './src/screens/ServiceCardScreen';
 import DetailsScreen from './src/screens/DetailsScreen';
 import PriceHelperScreen from './src/screens/PriceHelper';
+import FrontSideServices from './src/screens/FrontSideServices';
+import BackSideServices from './src/screens/BackSideServices';
+import MotorServices from './src/screens/MotorServices';
 
 //const AppStack = createStackNavigator({ Home: HomeScreen });
 const AuthStack = createStackNavigator({ Login: LoginScreen });
 
 const HomeTabStack = createStackNavigator({ 
   HomeTab: HomeScreen,
-  Details: DetailsScreen
+  Details: DetailsScreen,
+  FrontSideServices: FrontSideServices,
+  BackSideServices: BackSideServices,
+  MotorServices: MotorServices
 })
 
 const AppStack = createStackNavigator(
