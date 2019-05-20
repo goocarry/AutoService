@@ -1,33 +1,22 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { brands } from '../data/brand_db';
-import firebase from 'firebase';
+import firebase from 'react-native-firebase';
 
 
 export default class ServiceCardScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      work:''
     }
   }
 
-  handleChange = key => val => {
-    this.setState({ [key]: val })
+  static navigationOptions = {
+    title: 'Сервисная карта авто'
   }
 
-
-  writeData = () => {
-    firebase.database().ref('workList/').push({
-      work: this.state.work,
-      datetime: Date.now()
-    }).then((data) => {
-      //success callback
-      alert('Запись успешно сохранена')
-    }).catch((error) => {
-      //error callback
-      alert('error ', error)
-    })
+  goto = () => {
+    
   }
 
 
@@ -35,15 +24,8 @@ export default class ServiceCardScreen extends Component {
     return (
       <View style={styles.container}>
         <Text>ServiceCardScreen</Text>
-        <TextInput
-          placeholder="Введите запись о ремонте"
-          style={styles.input}
-          value={this.state.phoneNumber}
-          onChangeText={this.handleChange('work')}
-        >
-        </TextInput>
-        <TouchableOpacity onPress={this.writeData}>
-          <Text style={styles.btnText}>Записать</Text>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('RepairAdding')}>
+          <Text style={styles.btnText}>Добавить новую запись</Text>
         </TouchableOpacity>
       </View>
     );
