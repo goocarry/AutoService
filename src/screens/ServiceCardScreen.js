@@ -1,108 +1,49 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Picker, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { brands } from '../data/brand_db';
+import firebase from 'firebase';
+
 
 export default class ServiceCardScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      renderSecondPicker: false,
-      selectedBrand: '',
-      selectedModel: '',
-      modelsByBrand: [],
-      check: false,
-      vata: '',
-      brands: [
-        {
-          "id": 1,
-          "name": "Nissan"
-        },
-        {
-          "id": 2,
-          "name": "Toyota"
-        },
-      ],
-      ToyotaModels: [
-        {
-          "name": "camry"
-        },
-        {
-          "name": "jopa"
-        }
-      ],
-      NissanModels: [
-        {
-          "name": "juke"
-        },
-        {
-          "name": "hui"
-        }
-      ]
-
-    };
-  }
-
-  yourfunc = (itemValue, itemIndex) => {
-    this.setState({ selectedBrand: itemValue });
-    if (itemValue == 2) {
-      this.setState({
-        modelsByBrand: this.state.ToyotaModels
-      })
-    }
-    else if (itemValue == 1) {
-      this.setState({
-        modelsByBrand: this.state.NissanModels
-      })
+      work:''
     }
   }
 
-  check = () => {
-    //alert(this.state.modelsByBrand)
-    //alert(JSON.stringify(this.state.modelsByBrand, null, 4))
-    alert(this.state.selectedModel)
+  handleChange = key => val => {
+    this.setState({ [key]: val })
   }
 
-  renderModelPicker() {
-    return (
-      <Picker
-        selectedValue={this.state.selectedModel}
-        style={styles.input}
-        onValueChange={(itemValue, itemIndex) =>
-          this.setState({ selectedModel: itemValue })
-        }>
-        {
 
-          this.state.modelsByBrand.map((item, key) => (
-            <Picker.Item label={item.name} value={item.name} key={key} />)
-          )
-
-        }
-      </Picker>
-    )
+  writeData = () => {
+    firebase.database().ref('workList/').push({
+      work: this.state.work,
+      datetime: Date.now()
+    }).then((data) => {
+      //success callback
+      alert('Запись успешно сохранена')
+    }).catch((error) => {
+      //error callback
+      alert('error ', error)
+    })
   }
+
 
   render() {
     return (
-      <View>
-        <Picker
-          selectedValue={this.state.selectedBrand}
+      <View style={styles.container}>
+        <Text>ServiceCardScreen</Text>
+        <TextInput
+          placeholder="Введите запись о ремонте"
           style={styles.input}
-          onValueChange={(itemValue, itemIndex) =>
-            //this.setState({ brandAuto: itemValue })
-            this.yourfunc(itemValue, itemIndex)
-          }>
-          {
-            this.state.brands.map((item, key) => (
-              <Picker.Item label={item.name} value={item.id} key={key} />)
-            )
-          }
-        </Picker>
-
-
-        {!this.renderSecondPicker && this.renderModelPicker()}
-
-        <TouchableOpacity onPress={this.check}>
-          <Text style={styles.btnText}>check</Text>
+          value={this.state.phoneNumber}
+          onChangeText={this.handleChange('work')}
+        >
+        </TextInput>
+        <TouchableOpacity onPress={this.writeData}>
+          <Text style={styles.btnText}>Записать</Text>
         </TouchableOpacity>
       </View>
     );
@@ -110,6 +51,12 @@ export default class ServiceCardScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F5FCFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   input: {
     alignItems: 'center',
   },

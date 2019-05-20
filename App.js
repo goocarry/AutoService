@@ -12,6 +12,20 @@ import FrontSideServices from './src/screens/FrontSideServices';
 import BackSideServices from './src/screens/BackSideServices';
 import MotorServices from './src/screens/MotorServices';
 
+import firebase from 'firebase';
+
+var firebaseConfig = {
+  apiKey: "AIzaSyDTxoC3DFCvuWwWRt8ePJDT_BK_pSKccCA",
+  authDomain: "autoservice-661ed.firebaseapp.com",
+  databaseURL: "https://autoservice-661ed.firebaseio.com",
+  projectId: "autoservice-661ed",
+  storageBucket: "autoservice-661ed.appspot.com",
+  messagingSenderId: "154272590476",
+  appId: "1:154272590476:web:51a6dbc650773100"
+};
+// Initialize Firebase
+//firebase.initializeApp(firebaseConfig);
+
 //const AppStack = createStackNavigator({ Home: HomeScreen });
 const AuthStack = createStackNavigator({ Login: LoginScreen });
 

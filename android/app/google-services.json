@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "154272590476",
+    "firebase_url": "https://autoservice-661ed.firebaseio.com",
+    "project_id": "autoservice-661ed",
+    "storage_bucket": "autoservice-661ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154272590476:android:80282afbc17aa05b",
+        "android_client_info": {
+          "package_name": "com.autoservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "154272590476-jaarkaihmg1jsjai7omkh0i3roi0gt13.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsfGyvnKM5Mb_zQWWAGLj2hxkuwfPyGkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "154272590476-jaarkaihmg1jsjai7omkh0i3roi0gt13.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
