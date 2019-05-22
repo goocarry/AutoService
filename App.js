@@ -36,13 +36,13 @@ const AppStack = createStackNavigator(
     Home: {
       screen: createBottomTabNavigator(
         {
-          //HomeTab: {screen: HomeScreen},
-          HomeTab: { screen: HomeTabStack },
           //ServiceCardTab: { screen: ServiceCardScreen },
-          ServiceCardTab: {screen: ServiceCardTabStack},
-          ChatTab: { screen: ChatScreen },
-          ProfileTab: { screen: ProfileScreen },
-          PriceHelperTab: { screen: PriceHelperScreen }
+          'Моё авто': {screen: ServiceCardTabStack},
+          //HomeTab: {screen: HomeScreen},
+          'Автосервисы': { screen: HomeTabStack },
+          'Помошник': { screen: PriceHelperScreen },
+          'Сообщения': { screen: ChatScreen },
+          'Профиль': { screen: ProfileScreen }
         },
         {
           defaultNavigationOptions: ({ navigation }) => ({
@@ -50,13 +50,25 @@ const AppStack = createStackNavigator(
               const { routeName } = navigation.state;
               let IconComponent = Ionicons;
               let iconName;
-              if (routeName === 'HomeTab') {
-                iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+              if (routeName === 'Автосервисы') {
+                //iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+                //iconName = `ios-information-circle`;
+                iconName = `ios-construct`;
                 // Sometimes we want to add badges to some icons. 
                 // You can check the implementation below.
                 //IconComponent = HomeIconWithBadge; 
-              } else if (routeName === 'Settings') {
-                iconName = `ios-options`;
+              } 
+              else if (routeName === 'Профиль') {
+                iconName = `ios-contact`;
+              }
+              else if (routeName === 'Моё авто') {
+                iconName = `ios-car`;
+              }
+              else if (routeName === 'Помошник') {
+                iconName = `ios-cash`;
+              }
+              else if (routeName === 'Сообщения') {
+                iconName = `ios-mail`;
               }
       
               // You can return any component that you like here!
@@ -64,7 +76,7 @@ const AppStack = createStackNavigator(
             },
           }),
           tabBarOptions: {
-            activeTintColor: 'tomato',
+            activeTintColor: '#486d9e',
             inactiveTintColor: 'gray',
           },
         }, 

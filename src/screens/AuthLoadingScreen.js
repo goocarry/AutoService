@@ -3,7 +3,7 @@ import {
   ActivityIndicator,
   StatusBar,
   StyleSheet,
-  View,
+  View
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import User from '../User';
@@ -23,10 +23,17 @@ export default class AuthLoadingScreen extends Component {
   // Render any loading content that you like here
   render() {
     return (
-      <View>
+      <View style={styles.container}>
+        <StatusBar backgroundColor='#486d9e' barStyle="default" />
         <ActivityIndicator />
-        <StatusBar barStyle="default" />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignContent:'center',
+    justifyContent: 'center',
+  }
+})

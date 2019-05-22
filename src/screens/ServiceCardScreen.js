@@ -72,13 +72,17 @@ export default class ServiceCardScreen extends Component {
   render() {
     return (
       <View style={styles.container} >
-        <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('RepairAdding')}>
-            <Text style={styles.btnText}>Добавить новую запись</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('RepairAdding')}>
-            <Text style={styles.btnText}>Удалить запись</Text>
-          </TouchableOpacity>
+        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+          <View style={styles.buttonContainerAdd}>
+            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('RepairAdding')}>
+              <Text style={styles.btnTextAdd}>Добавить запись</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.buttonContainerDelete}>
+            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('RepairAdding')}>
+              <Text style={styles.btnTextDelete}>Удалить запись</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.historyTextView}>
           <Text style={styles.historyText}>История обслуживания</Text>
@@ -97,7 +101,7 @@ export default class ServiceCardScreen extends Component {
           }
           keyExtractor={item => item.repairDone}
         />
-      </View>
+      </View >
     );
   }
 
@@ -127,12 +131,16 @@ const styles = StyleSheet.create({
   email: {
     color: 'red'
   },
-  btnText: {
-    fontSize: 20,
-    color: 'green',
+  btnTextAdd: {
+    fontSize: 15,
+    color: 'white',
+  },
+  btnTextDelete: {
+    fontSize: 15,
+    color: 'white',
   },
   historyTextView: {
-    alignItems: 'center', 
+    alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 20,
     marginRight: 20,
@@ -141,6 +149,21 @@ const styles = StyleSheet.create({
   },
   historyText: {
     fontSize: 20,
-    color: 'green',
+    color: '#486d9e',
+  },
+  buttonContainerAdd: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonContainerDelete: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    padding: 10,
+    backgroundColor: '#486d9e',
+    borderRadius: 5
   }
 });
