@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, TouchableOpacity, TouchableHighlight, StyleSheet } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, TouchableHighlight, StyleSheet, Picker } from 'react-native';
 import Separator from '../components/Separator';
 
 export default class PriceHelperScreen extends Component {
@@ -8,30 +8,68 @@ export default class PriceHelperScreen extends Component {
         this.state = {
             response: [
                 {
-                    "room": {
-                        "price": 217,
-                        "available": true
+                    "name": "Японец",
+                    "address": "Жорницкого, 22/4",
+                    "phone": "+7(4112) 44-70-70",
+                    "frontSideServices": {
+                        "id": 1,
+                        "amortizator": 500,
+                        "amortizatornayaStoyka": 500,
                     }
+
                 },
                 {
-                    "room": {
-                        "price": 302,
-                        "available": true,
+                    "name": "Дежнев",
+                    "address": "Дежнева, 15",
+                    "phone": "+7(4112) 44-70-70",
+                    "frontSideServices": {
+                        "id": 2,
+                        "amortizator": 100,
+                        "amortizatornayaStoyka": 500,
                     }
+
                 },
                 {
-                    "room": {
-                        "price": 427,
-                        "available": true,
+                    "name": "Другой сервис",
+                    "address": "Петра Алексеева, 10",
+                    "phone": "+7(4112) 44-70-70",
+                    "frontSideServices": {
+                        "id": 3,
+                        "amortizator": 100,
+                        "amortizatornayaStoyka": 500,
                     }
+
+                }
+            ],
+            //massiv: [],
+            selectedService: '',
+            services: [
+                {
+                    "id": "amortizator",
+                    "name": "Амортизатор"
+                },
+                {
+                    "id": "amortizatornayaStoyka",
+                    "name": "Стойка амортизатора"
                 }
             ]
         };
     }
 
     check = () => {
-        var min = Math.min.apply(null, this.state.response.map((v) => v.room.price));
-        alert(min);
+        //var min = Math.min.apply(null, this.state.response.map((v) => v.frontSideServices.amortizator));
+        var massiv = [];
+        var min = Math.min.apply(null, this.state.response.map((v) => v.frontSideServices[this.state.selectedService]));
+        //alert(min);
+        this.state.response.map((v) => {
+            if (v.frontSideServices.amortizator === min) {
+                //alert(v.name)
+                massiv.push(v.name, min);
+                alert(massiv);
+            }
+        })
+        
+        //alert(JSON.stringify(this.state.response.map((v) => v.frontSideServices.amortizator)))
     }
 
 
@@ -39,18 +77,30 @@ export default class PriceHelperScreen extends Component {
         return (
 
             <View>
-                <Text> PriceHelperScreen </Text>
+                <Text> выберите услугу </Text>
+                <Picker
+                    selectedValue={this.state.selectedService}
+                    style={styles.input}
+                    onValueChange={(itemValue, itemIndex) =>
+                        this.setState({ selectedService: itemValue })
+                    }>
+                    {//TODO добавить новую services_db с нормальными id в папку data и оттуда брать услуги в пикер
+                        this.state.services.map((item, key) => (
+                            <Picker.Item label={item.name} value={item.id} key={key} />)
+                        )
+                    }
+                </Picker>
                 <TouchableOpacity onPress={this.check}>
                     <Text>check</Text>
                 </TouchableOpacity>
                 <FlatList
-                    data={this.state.response.room}
+                    data={this.state.response}
                     showsVerticalScrollIndicator={true}
                     renderItem={({ item }) =>
                         <TouchableHighlight>
                             <View style={styles.flatview}>
-                                <Text style={styles.name}>{item.price}</Text>
-                                <Text style={styles.email}>{item.available}</Text>
+                                <Text style={styles.name}>{item.name}</Text>
+                                <Text style={styles.email}>{item.address}</Text>
                                 <Separator />
                             </View>
                         </TouchableHighlight>
@@ -84,6 +134,14 @@ const styles = StyleSheet.create({
     },
     email: {
         color: 'red'
-    }
+    },
+    input: {
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        width: '80%',
+        marginBottom: 10,
+        borderRadius: 5,
+    },
 
 });

@@ -92,10 +92,10 @@ export default class ServiceCardScreen extends Component {
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) =>
             <View style={styles.flatview}>
-              <Text style={styles.name}>{item.repairDone}</Text>
-              <Text style={styles.email}>{item.repairCosts}</Text>
-              <Text style={styles.email}>{item.parts}</Text>
-              <Text style={styles.email}>{item.partsCosts}</Text>
+              <Text style={styles.name}>Что сделано:{item.repairDone}</Text>
+              <Text style={styles.email}>Стоимость:{item.repairCosts}</Text>
+              <Text style={styles.email}>Зап.части:{item.parts}</Text>
+              <Text style={styles.email}>Стоимость зап.частей:{item.partsCosts}</Text>
               <Separator />
             </View>
           }
@@ -126,10 +126,11 @@ const styles = StyleSheet.create({
   },
   name: {
     fontFamily: 'Verdana',
-    fontSize: 18
+    fontSize: 18,
+    color: '#486d9e'
   },
   email: {
-    color: 'red'
+    fontFamily: 'Verdana',
   },
   btnTextAdd: {
     fontSize: 15,
