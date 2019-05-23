@@ -23,12 +23,13 @@ export default class RepairAddingScreen extends Component {
 
 
     writeData = () => {
+        var d = new Date();
         firebase.database().ref('repairList/').push({
             repairDone: this.state.repairDone,
             repairCosts: this.state.repairCosts,
             parts: this.state.parts,
             partsCosts: this.state.partsCosts,
-            datetime: Date.now()
+            datetime: d.toISOString().split('T')[0]
         }).then((data) => {
             //success callback
             alert('Запись успешно сохранена')

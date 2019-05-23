@@ -6,6 +6,7 @@ export default class ChatScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      dateChecker:'',
       renderSecondPicker: false,
       selectedBrand: '',
       selectedModel: '',
@@ -62,6 +63,11 @@ export default class ChatScreen extends Component {
     alert(this.state.selectedModel)
   }
 
+  checkDate = () => {
+    var d = new Date();
+    alert(d.toISOString().split('T')[0]);
+  }
+
   renderModelPicker() {
     return (
       <Picker
@@ -103,6 +109,10 @@ export default class ChatScreen extends Component {
 
         <TouchableOpacity onPress={this.check}>
           <Text style={styles.btnText}>check</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={this.checkDate}>
+          <Text style={styles.btnText}>checkDate</Text>
         </TouchableOpacity>
       </View>
     );

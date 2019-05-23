@@ -46,29 +46,6 @@ export default class ServiceCardScreen extends Component {
     alert(this.state.items)
   }
 
-  //render with ItemComponent
-  /*
-  render() {
-    return (
-      <View style={styles.container} >
-        <Text>ServiceCardScreen</Text>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('RepairAdding')}>
-          <Text style={styles.btnText}>Добавить новую запись</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.check}>
-          <Text style={styles.btnText}>check</Text>
-        </TouchableOpacity>
-        <View style={styles.container}>
-          {this.state.items.length > 0 ? (
-            <ItemComponent items={this.state.items} />
-          ) : (
-              <Text>No items</Text>
-            )}
-        </View>
-      </View>
-    );
-  }
-  */
   render() {
     return (
       <View style={styles.container} >
@@ -93,6 +70,7 @@ export default class ServiceCardScreen extends Component {
           renderItem={({ item }) =>
             <View style={styles.flatview}>
               <Text style={styles.name}>Что сделано:{item.repairDone}</Text>
+              <Text style={styles.email}>Дата:{item.datetime}</Text>
               <Text style={styles.email}>Стоимость:{item.repairCosts}</Text>
               <Text style={styles.email}>Зап.части:{item.parts}</Text>
               <Text style={styles.email}>Стоимость зап.частей:{item.partsCosts}</Text>
