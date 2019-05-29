@@ -1,5 +1,18 @@
 export const brands = [
     {
+      "id": 1,
+      "name": "Nissan"
+    },
+    {
+      "id": 2,
+      "name": "Toyota"
+    },
+  ]
+
+
+/*
+export const brands = [
+    {
         "id": 1,
         "name": "Acura"
     },
@@ -284,3 +297,4 @@ export const brands = [
         "name": "Yugo"
     }
 ]
+*/

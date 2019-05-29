@@ -63,11 +63,6 @@ export default class ChatScreen extends Component {
     alert(this.state.selectedModel)
   }
 
-  checkDate = () => {
-    var d = new Date();
-    alert(d.toISOString().split('T')[0]);
-  }
-
   renderModelPicker() {
     return (
       <Picker

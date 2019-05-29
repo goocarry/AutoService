@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, Text, TextInput, View, Alert, Picker, Button } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, TextInput, View, Alert, Picker, Button, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import User from '../User';
 import { brands } from '../data/brand_db';
 import { models } from '../data/models_db';
+import { ToyotaModels } from '../data/ToyotaModels';
+import { NissanModels } from '../data/NissanModels';
+
+const logoUri = 'https://www.freelogodesign.org/file/app/client/thumb/d53926c2-8b5d-4478-93b1-24ca02961be8_1000x600-watermark.png?20190528';
 
 export default class LoginScreen extends Component {
 
@@ -14,7 +18,10 @@ export default class LoginScreen extends Component {
   state = {
     phoneNumber: '+7',
     brandAuto: '',
-    modelAuto: ''
+    modelAuto: '',
+    selectedBrand: '',
+    selectedModel: '',
+    modelsByBrand: [],
   }
 
   handleChange = key => val => {
@@ -29,8 +36,8 @@ export default class LoginScreen extends Component {
     if (this.state.phoneNumber.length < 10) {
       Alert.alert('Неверный номер телефона')
     }
-    else if (this.state.brandAuto.length < 3) {
-      Alert.alert('Неверная марка авто')
+    else if (this.state.selectedBrand.length < 3) {
+      Alert.alert('Выберите марку авто')
     }
     else {
       //alert(this.state.phoneNumber + '/n' + this.state.brandAuto)
@@ -41,6 +48,22 @@ export default class LoginScreen extends Component {
     }
   }
 
+  yourfunc = (itemValue, itemIndex) => {
+    this.setState({ selectedBrand: itemValue });
+    if (itemValue == 2) {
+      this.setState({
+        modelsByBrand: ToyotaModels
+      })
+    }
+    else if (itemValue == 1) {
+      this.setState({
+        modelsByBrand: NissanModels
+      })
+    }
+  }
+
+  //render with phone number and all brands and all models but not connected by choice
+  /*
   render() {
     return (
       <View style={styles.container}>
@@ -77,16 +100,6 @@ export default class LoginScreen extends Component {
             models.map((item, key) => (
               <Picker.Item label={item.name} value={item.name} key={key} />)
             )
-            /*
-            models.find(item => item.brand_id === this.state.brandAuto).map((item, key) => (
-              <Picker.Item label={item.name} value={item.name} key={key} />)
-            )
-            
-            models.map((item, key) => (
-              <Picker.Item label={item.name} value={item.name} key={key} />)
-            )
-            */
-
           }
         </Picker>
         <TouchableOpacity onPress={this.submitForm}>
@@ -98,6 +111,55 @@ export default class LoginScreen extends Component {
       </View>
     );
   }
+  */
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Image source={{ uri: logoUri }} style={{ width: 200, height: 200, marginBottom: 25 }} />
+        <Text>Введите номер телефона..</Text>
+        <TextInput
+          placeholder="Введите номер телефона"
+          keyboardType="number-pad"
+          style={styles.input}
+          value={this.state.phoneNumber}
+          onChangeText={this.handleChange('phoneNumber')}
+        >
+        </TextInput>
+        <Text>Выберите марку автомобиля..</Text>
+        <Picker
+          selectedValue={this.state.selectedBrand}
+          style={styles.input}
+          onValueChange={(itemValue, itemIndex) =>
+            //this.setState({ brandAuto: itemValue })
+            this.yourfunc(itemValue, itemIndex)
+          }>
+          {
+            brands.map((item, key) => (
+              <Picker.Item label={item.name} value={item.id} key={key} />)
+            )
+          }
+        </Picker>
+        <Text>Выберите модель автомобиля..</Text>
+        <Picker
+          selectedValue={this.state.selectedModel}
+          style={styles.input}
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({ selectedModel: itemValue })
+          }>
+          {
+            this.state.modelsByBrand.map((item, key) => (
+              <Picker.Item label={item.name} value={item.name} key={key} />)
+            )
+          }
+        </Picker>
+        <TouchableOpacity style={styles.button} onPress={this.submitForm}>
+          <Text style={styles.btnText}>Войти</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
 }
 
 const styles = StyleSheet.create({
@@ -117,6 +179,11 @@ const styles = StyleSheet.create({
   },
   btnText: {
     fontSize: 20,
-    color: 'green',
+    color: 'white',
+  },
+  button: {
+    padding: 10,
+    backgroundColor: '#486d9e',
+    borderRadius: 5
   }
 });
