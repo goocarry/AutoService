@@ -1,125 +1,55 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Picker, TouchableOpacity } from 'react-native';
-import { brands } from '../data/brand_db';
+import { SafeAreaView, View, Text, StyleSheet, Picker, FlatList, TouchableOpacity } from 'react-native';
+import firebase from 'react-native-firebase';
+
 
 export default class ChatScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dateChecker:'',
-      renderSecondPicker: false,
-      selectedBrand: '',
-      selectedModel: '',
-      modelsByBrand: [],
-      check: false,
-      vata: '',
-      brands: [
-        {
-          "id": 1,
-          "name": "Nissan"
-        },
-        {
-          "id": 2,
-          "name": "Toyota"
-        },
-      ],
-      ToyotaModels: [
-        {
-          "name": "camry"
-        },
-        {
-          "name": "jopa"
+
+  state = {
+    users: []
+  }
+
+  componentWillMount() {
+    let dbRef = firebase.database().ref('Users');
+    dbRef.on('child_added', (val) => {
+      let person = val.val();
+      person.phone = val.key;
+      this.setState((prevState) => {
+        return {
+          users: [...prevState.users, person]
         }
-      ],
-      NissanModels: [
-        {
-          "name": "juke"
-        },
-        {
-          "name": "hui"
-        }
-      ]
-
-    };
-  }
-
-  yourfunc = (itemValue, itemIndex) => {
-    this.setState({ selectedBrand: itemValue });
-    if (itemValue == 2) {
-      this.setState({
-        modelsByBrand: this.state.ToyotaModels
       })
-    }
-    else if (itemValue == 1) {
-      this.setState({
-        modelsByBrand: this.state.NissanModels
-      })
-    }
+    })
   }
 
-  check = () => {
-    //alert(this.state.modelsByBrand)
-    //alert(JSON.stringify(this.state.modelsByBrand, null, 4))
-    alert(this.state.selectedModel)
-  }
-
-  renderModelPicker() {
+  renderRow = ({ item }) => {
     return (
-      <Picker
-        selectedValue={this.state.selectedModel}
-        style={styles.input}
-        onValueChange={(itemValue, itemIndex) =>
-          this.setState({ selectedModel: itemValue })
-        }>
-        {
-
-          this.state.modelsByBrand.map((item, key) => (
-            <Picker.Item label={item.name} value={item.name} key={key} />)
-          )
-
-        }
-      </Picker>
+      <TouchableOpacity style={{padding:10, borderBottomColor:'#ccc', borderBottomWidth:1 }}>
+        <Text style={{fontSize:20}}>{item.modelAuto}</Text>
+      </TouchableOpacity>
     )
   }
 
   render() {
     return (
-      <View>
-        <Picker
-          selectedValue={this.state.selectedBrand}
-          style={styles.input}
-          onValueChange={(itemValue, itemIndex) =>
-            //this.setState({ brandAuto: itemValue })
-            this.yourfunc(itemValue, itemIndex)
-          }>
-          {
-            this.state.brands.map((item, key) => (
-              <Picker.Item label={item.name} value={item.id} key={key} />)
-            )
-          }
-        </Picker>
+      <SafeAreaView>
+        <FlatList
+          data={this.state.users}
+          renderItem={this.renderRow}
+          keyExtractor={(item) => item.phone}
+        >
 
-
-        {!this.renderSecondPicker && this.renderModelPicker()}
-
-        <TouchableOpacity onPress={this.check}>
-          <Text style={styles.btnText}>check</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={this.checkDate}>
-          <Text style={styles.btnText}>checkDate</Text>
-        </TouchableOpacity>
-      </View>
+        </FlatList>
+      </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  input: {
+  container: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
-  btnText: {
-    fontSize: 20,
-    color: 'green',
-  }
 })

@@ -6,6 +6,7 @@ import { brands } from '../data/brand_db';
 import { models } from '../data/models_db';
 import { ToyotaModels } from '../data/ToyotaModels';
 import { NissanModels } from '../data/NissanModels';
+import firebase from 'react-native-firebase';
 
 const logoUri = 'https://www.freelogodesign.org/file/app/client/thumb/d53926c2-8b5d-4478-93b1-24ca02961be8_1000x600-watermark.png?20190528';
 
@@ -28,10 +29,6 @@ export default class LoginScreen extends Component {
     this.setState({ [key]: val })
   }
 
-  check = () => {
-    alert(this.state.brandAuto)
-  }
-
   submitForm = async () => {
     if (this.state.phoneNumber.length < 10) {
       Alert.alert('Неверный номер телефона')
@@ -44,6 +41,7 @@ export default class LoginScreen extends Component {
       //save user data
       await AsyncStorage.setItem('userPhone', this.state.phoneNumber);
       User.phoneNumber = this.state.phoneNumber;
+      firebase.database().ref('Users/' + User.phoneNumber).set({brandAuto: this.state.selectedBrand, modelAuto: this.state.selectedModel});
       this.props.navigation.navigate('App');
     }
   }
