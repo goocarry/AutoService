@@ -376,5 +376,154 @@ export const autoservices = [
                 "Сальник коленвала (передний)": "1000"
             }
         ]
-    }
+    },
+    {
+        "name": "Sto-Pro",
+        "address": "Ленская ул., 3А",
+        "phone": "+7 (411) 221-97-94",
+        "frontSideServices": [
+            {
+                "id": "6",
+                "amortizator": "500",
+                "amortizatornayaStoyka": "500",
+                "podshipnikStupichniy": "500",
+                "tormoznieKolodkiDisk": "500",
+                "tormoznieKolodkiBaraban": "500",
+                "tormoznoiShlang": "500",
+                "Рулевая тяга": "500",
+                "Рулевая тяга (пыльник)": "500",
+                "Рулевой наконечник": "500",
+                "Рулевой наконечник (пыльник)": "500",
+                "sailentblockPeredniyNijnegoRichaga": "500",
+                "sailentblockZadniyNijnegoRichaga": "500",
+                "sailentblockPeredniyVerhnegoRichaga": "500",
+                "sailentblockZadniyVerhnegoRichaga": "500",
+                "sharovayaOporaVerhnegoRichaga": "500",
+                "sharovayaOporaVerhnegoRichagaPilnik": "500",
+                "sharovayaOporaNijnegoRichaga": "500",
+                "sharovayaOporaNijnegoRichagaPilnik": "500",
+                "vtulkiStabilizatora": "500",
+                "stoikiStabilizatoraLink": "500",
+                "vtulkiStoikiStabilizatoraLink": "500",
+                "shrusNarujniy": "500",
+                "shrusNarujniyPilnik": "500",
+                "shrusVnutrenniy": "500",
+                "shrusVnutrenniyPilnik": "500",
+                "Рулевая рейка": "500",
+                "Рулевой редуктор": "500"
+            }
+        ],
+        "backSideServices": [
+            {
+                "id": "6",
+                "amortizator": "1000",
+                "amortizatornayaStoyka": "1000",
+                "podshipnikStupichniy": "1000",
+                "podshipnikPoluosi": "1000",
+                "salnikPoluosi": "1000",
+                "tormoznieKolodkiDisk": "1000",
+                "tormoznieKolodkiBaraban": "1000",
+                "tormoznoiShlang": "1000",
+                "sailentblockPeredniyNijnegoRichaga": "1000",
+                "sailentblockZadniyNijnegoRichaga": "1000",
+                "sailentblockPeredniyVerhnegoRichaga": "1000",
+                "sailentblockZadniyVerhnegoRichaga": "1000",
+                "sharovayaOporaVerhnegoRichaga": "1000",
+                "sharovayaOporaVerhnegoRichagaPilnik": "1000",
+                "sharovayaOporaNijnegoRichaga": "1000",
+                "sharovayaOporaNijnegoRichagaPilnik": "1000",
+                "vtulkiStabilizatora": "1000",
+                "stoikiStabilizatoraLink": "1000",
+                "vtulkiStoikiStabilizatoraLink": "1000",
+                "shrusNarujniy": "1000",
+                "shrusNarujniyPilnik": "1000",
+                "shrusVnutrenniy": "1000",
+                "shrusVnutrenniyPilnik": "1000",
+                "salnikBokovoyReduktora": "1000",
+                "salnikHvostovikaReduktora": "1000",
+                "podshipnikViskomuftiReduktora": "1000",
+            }
+        ],
+        "motorServices": [
+            {
+                "id": "6",
+                "Сальник коленвала (передний)": "1000",
+            }
+        ]
+    },
+    {
+        "name": "Display авто",
+        "address": "ул. Лермонтова, 37",
+        "phone": "8 (411) 242-09-19",
+        "frontSideServices": [
+            {
+                "id": "7",
+                "amortizator": "500",
+                "amortizatornayaStoyka": "500",
+                "podshipnikStupichniy": "500",
+                "tormoznieKolodkiDisk": "500",
+                "tormoznieKolodkiBaraban": "500",
+                "tormoznoiShlang": "500",
+                "Рулевая тяга": "500",
+                "Рулевая тяга (пыльник)": "500",
+                "Рулевой наконечник": "500",
+                "Рулевой наконечник (пыльник)": "500",
+                "sailentblockPeredniyNijnegoRichaga": "500",
+                "sailentblockZadniyNijnegoRichaga": "500",
+                "sailentblockPeredniyVerhnegoRichaga": "500",
+                "sailentblockZadniyVerhnegoRichaga": "500",
+                "sharovayaOporaVerhnegoRichaga": "500",
+                "sharovayaOporaVerhnegoRichagaPilnik": "500",
+                "sharovayaOporaNijnegoRichaga": "500",
+                "sharovayaOporaNijnegoRichagaPilnik": "500",
+                "vtulkiStabilizatora": "500",
+                "stoikiStabilizatoraLink": "500",
+                "vtulkiStoikiStabilizatoraLink": "500",
+                "shrusNarujniy": "500",
+                "shrusNarujniyPilnik": "500",
+                "shrusVnutrenniy": "500",
+                "shrusVnutrenniyPilnik": "500",
+                "Рулевая рейка": "500",
+                "Рулевой редуктор": "500"
+            }
+        ],
+        "backSideServices": [
+            {
+                "id": "7",
+                "amortizator": "1000",
+                "amortizatornayaStoyka": "1000",
+                "podshipnikStupichniy": "1000",
+                "podshipnikPoluosi": "1000",
+                "salnikPoluosi": "1000",
+                "tormoznieKolodkiDisk": "1000",
+                "tormoznieKolodkiBaraban": "1000",
+                "tormoznoiShlang": "1000",
+                "sailentblockPeredniyNijnegoRichaga": "1000",
+                "sailentblockZadniyNijnegoRichaga": "1000",
+                "sailentblockPeredniyVerhnegoRichaga": "1000",
+                "sailentblockZadniyVerhnegoRichaga": "1000",
+                "sharovayaOporaVerhnegoRichaga": "1000",
+                "sharovayaOporaVerhnegoRichagaPilnik": "1000",
+                "sharovayaOporaNijnegoRichaga": "1000",
+                "sharovayaOporaNijnegoRichagaPilnik": "1000",
+                "vtulkiStabilizatora": "1000",
+                "stoikiStabilizatoraLink": "1000",
+                "vtulkiStoikiStabilizatoraLink": "1000",
+                "shrusNarujniy": "1000",
+                "shrusNarujniyPilnik": "1000",
+                "shrusVnutrenniy": "1000",
+                "shrusVnutrenniyPilnik": "1000",
+                "salnikBokovoyReduktora": "1000",
+                "salnikHvostovikaReduktora": "1000",
+                "podshipnikViskomuftiReduktora": "1000",
+            }
+        ],
+        "motorServices": [
+            {
+                "id": "7",
+                "Сальник коленвала (передний)": "1000",
+            }
+        ]
+    },
+    
 ]

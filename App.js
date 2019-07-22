@@ -14,6 +14,7 @@ import FrontSideServices from './src/screens/FrontSideServices';
 import BackSideServices from './src/screens/BackSideServices';
 import MotorServices from './src/screens/MotorServices';
 import RepairAddingScreen from './src/screens/RepairAddingScreen';
+import RepairDetailsScreen from './src/screens/RepairDetailsScreen';
 
 //const AppStack = createStackNavigator({ Home: HomeScreen });
 const AuthStack = createStackNavigator({ Login: LoginScreen });
@@ -28,7 +29,8 @@ const HomeTabStack = createStackNavigator({
 
 const ServiceCardTabStack = createStackNavigator({
   ServiceCardTab: ServiceCardScreen,
-  RepairAdding: RepairAddingScreen
+  RepairAdding: RepairAddingScreen,
+  RepairDetails: RepairDetailsScreen
 })
 
 const AppStack = createStackNavigator(

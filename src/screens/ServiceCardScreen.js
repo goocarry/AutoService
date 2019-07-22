@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, FlatList } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, FlatList, TouchableHighlight } from 'react-native';
 import { brands } from '../data/brand_db';
 import firebase from 'react-native-firebase';
 import ItemComponent from '../components/ItemComponent';
@@ -36,6 +36,7 @@ export default class ServiceCardScreen extends Component {
     firebase.database().ref('repairList/').on('value', snapshot => {
       //console.log(snapshot.val())
       //alert(JSON.stringify(snapshot.val()))
+      alert(JSON.stringify(Object.keys(snapshot.val())));
       let data = snapshot.val();
       let items = Object.values(data);
       this.setState({ items });
@@ -47,6 +48,66 @@ export default class ServiceCardScreen extends Component {
   }
 
   render() {
+    /*
+    return(
+      <View style={styles.container} >
+                <StatusBar backgroundColor='#486d9e' barStyle="default" />
+                <FlatList
+                    data={this.state.items}
+                    showsVerticalScrollIndicator={false}
+                    renderItem={({ item }) =>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('RepairAdding', { item: item })}>
+                            <View style={styles.flatview}>
+                                <Text style={styles.name}>{item.repairDone}</Text>
+                                <Text style={styles.name}>{item.datetime}</Text>
+                                <Text style={styles.email}>{item.repairCosts}</Text>
+                                <Separator />
+                            </View>
+                        </TouchableHighlight>
+                    }
+                    keyExtractor={item => item.name}
+                />
+            </View>
+    )
+    */
+
+    return (
+      <View style={styles.container} >
+        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+          <View style={styles.buttonContainerAdd}>
+            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('RepairAdding')}>
+              <Text style={styles.btnTextAdd}>Добавить запись</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.buttonContainerDelete}>
+            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('RepairAdding')}>
+              <Text style={styles.btnTextDelete}>Удалить запись</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.historyTextView}>
+          <Text style={styles.historyText}>История обслуживания</Text>
+        </View>
+        <FlatList
+          data={this.state.items}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) =>
+            <TouchableHighlight onPress={() => this.props.navigation.navigate('RepairDetails', { item: item })}>
+              <View style={styles.flatview}>
+                <Text style={styles.name}>{item.repairDone}</Text>
+                <Text style={styles.email}>Дата:{item.datetime}</Text>
+                <Text style={styles.email}>Стоимость:{item.repairCosts}</Text>
+                <Separator />
+              </View>
+            </TouchableHighlight>
+          }
+          keyExtractor={item => item.repairDone}
+        />
+      </View >
+    );
+
+
+    /*
     return (
       <View style={styles.container} >
         <View style={{ flexDirection: 'row', marginTop: 20 }}>
@@ -69,7 +130,7 @@ export default class ServiceCardScreen extends Component {
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) =>
             <View style={styles.flatview}>
-              <Text style={styles.name}>Что сделано:{item.repairDone}</Text>
+              <Text style={styles.name}>{item.repairDone}</Text>
               <Text style={styles.email}>Дата:{item.datetime}</Text>
               <Text style={styles.email}>Стоимость:{item.repairCosts}</Text>
               <Text style={styles.email}>Зап.части:{item.parts}</Text>
@@ -81,6 +142,7 @@ export default class ServiceCardScreen extends Component {
         />
       </View >
     );
+    */
   }
 
 }
