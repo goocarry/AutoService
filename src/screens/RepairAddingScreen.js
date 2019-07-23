@@ -26,11 +26,11 @@ export default class RepairAddingScreen extends Component {
 
 
     writeData = () => {
-        alert(User.city);
+        //alert(User.city);
         
         var d = new Date();
         //почему то User.city тут дает null и сохраняет в неправильный путь в файрбэйс
-        firebase.database().ref(User.city + '/' + User.phoneNumber + '/repairList/' + d.toISOString().split('T')[0] + this.state.repairDone).set({
+        firebase.database().ref(User.city + '/Users/' + User.phoneNumber + '/repairList/' + d.toISOString().split('T')[0] + this.state.repairDone).set({
             datetime: d.toISOString().split('T')[0],
             repairDone: this.state.repairDone,
             repairCosts: this.state.repairCosts,

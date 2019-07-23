@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, FlatList, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, FlatList, TouchableHighlight, StatusBar } from 'react-native';
 import { brands } from '../data/brand_db';
 import firebase from 'react-native-firebase';
 import ItemComponent from '../components/ItemComponent';
@@ -33,7 +33,7 @@ export default class ServiceCardScreen extends Component {
   */
 
   readUserData() {
-    firebase.database().ref(User.city + '/' + User.phoneNumber + '/repairList/').on('value', snapshot => {
+    firebase.database().ref(User.city + '/Users/' + User.phoneNumber + '/repairList/').on('value', snapshot => {
       //console.log(snapshot.val())
       //alert(JSON.stringify(snapshot.val()))
       //alert(JSON.stringify(Object.keys(snapshot.val())));
@@ -75,6 +75,7 @@ export default class ServiceCardScreen extends Component {
 
     return (
       <View style={styles.container} >
+        <StatusBar backgroundColor='#486d9e' barStyle="default" />
         <View style={{ flexDirection: 'row', marginTop: 20 }}>
           <View style={styles.buttonContainerAdd}>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('RepairAdding')}>

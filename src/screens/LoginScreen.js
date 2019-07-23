@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, Text, TextInput, View, Alert, Picker, Button, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, TextInput, View, Alert, Picker, Button, Image, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import User from '../User';
 import { brands } from '../data/brand_db';
@@ -123,6 +123,7 @@ export default class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor='#486d9e' barStyle="default" />
         <Image source={{ uri: logoUri }} style={{ width: 180, height: 180, marginBottom: 25 }} />
         <Text>Введите номер телефона..</Text>
         <TextInput
