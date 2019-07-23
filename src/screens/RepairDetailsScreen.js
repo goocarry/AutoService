@@ -11,7 +11,7 @@ export default class RepairDetailsScreen extends Component {
     }
 
     static navigationOptions = {
-        title: 'Подробности о ремонте'
+        title: 'Сведения о ремонте'
     }
 
     handleRemove = () => {
@@ -26,8 +26,6 @@ export default class RepairDetailsScreen extends Component {
         const { params } = this.props.navigation.state;
         return (
             <View style={styles.container}>
-                <Text>Сведения о ремонте</Text>
-                <Separator />
                 <Text>{params.item.repairDone}</Text>
                 <Text>{params.item.datetime}</Text>
                 <Text>{params.item.repairCosts}</Text>

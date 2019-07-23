@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import firebase from 'react-native-firebase';
+import User from '../User';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class RepairAddingScreen extends Component {
     constructor(props) {
@@ -10,12 +12,13 @@ export default class RepairAddingScreen extends Component {
             repairCosts: '',
             parts: '',
             partsCosts: ''
-        }
+        };
     }
 
     static navigationOptions = {
         title: 'Новая запись о ремонте'
     }
+
 
     handleChange = key => val => {
         this.setState({ [key]: val })
@@ -23,8 +26,11 @@ export default class RepairAddingScreen extends Component {
 
 
     writeData = () => {
+        alert(User.city);
+        
         var d = new Date();
-        firebase.database().ref('repairList/' + d.toISOString().split('T')[0] + this.state.repairDone).set({
+        //почему то User.city тут дает null и сохраняет в неправильный путь в файрбэйс
+        firebase.database().ref(User.city + '/' + User.phoneNumber + '/repairList/' + d.toISOString().split('T')[0] + this.state.repairDone).set({
             datetime: d.toISOString().split('T')[0],
             repairDone: this.state.repairDone,
             repairCosts: this.state.repairCosts,
@@ -38,6 +44,7 @@ export default class RepairAddingScreen extends Component {
             //error callback
             alert('error ', error)
         })
+      
     }
 
     handleChange = key => val => {
@@ -47,6 +54,7 @@ export default class RepairAddingScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <Text>{User.city}</Text>
                 <Text>Что ремонтировали?</Text>
                 <TextInput
                     placeholder="Введите запись о ремонте"

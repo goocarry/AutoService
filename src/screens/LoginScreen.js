@@ -7,6 +7,7 @@ import { models } from '../data/models_db';
 import { ToyotaModels } from '../data/ToyotaModels';
 import { NissanModels } from '../data/NissanModels';
 import firebase from 'react-native-firebase';
+import { cities } from '../data/city_db';
 
 const logoUri = 'https://www.freelogodesign.org/file/app/client/thumb/d53926c2-8b5d-4478-93b1-24ca02961be8_1000x600-watermark.png?20190528';
 
@@ -17,6 +18,8 @@ export default class LoginScreen extends Component {
   }
 
   state = {
+    city: cities,
+    selectedCity: '',
     phoneNumber: '+7',
     brandAuto: '',
     modelAuto: '',
@@ -36,12 +39,18 @@ export default class LoginScreen extends Component {
     else if (this.state.selectedBrand.length < 3) {
       Alert.alert('Выберите марку авто')
     }
+    else if (this.state.selectedCity.length < 3) {
+      Alert.alert('Выберите город')
+    }
     else {
       //alert(this.state.phoneNumber + '/n' + this.state.brandAuto)
       //save user data
-      await AsyncStorage.setItem('userPhone', this.state.phoneNumber);
+      //await AsyncStorage.setItem('userPhone', this.state.phoneNumber);
+      await Promise.all([AsyncStorage.setItem('userPhone', this.state.phoneNumber), AsyncStorage.setItem('city', this.state.selectedCity)]);
+      
       User.phoneNumber = this.state.phoneNumber;
-      firebase.database().ref('Users/' + User.phoneNumber).set({brandAuto: this.state.selectedBrand, modelAuto: this.state.selectedModel});
+      User.city = this.state.selectedCity;
+      firebase.database().ref(User.city + '/Users/' + User.phoneNumber).set({brandAuto: this.state.selectedBrand, modelAuto: this.state.selectedModel});
       this.props.navigation.navigate('App');
     }
   }
@@ -114,7 +123,7 @@ export default class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image source={{ uri: logoUri }} style={{ width: 200, height: 200, marginBottom: 25 }} />
+        <Image source={{ uri: logoUri }} style={{ width: 180, height: 180, marginBottom: 25 }} />
         <Text>Введите номер телефона..</Text>
         <TextInput
           placeholder="Введите номер телефона"
@@ -124,6 +133,19 @@ export default class LoginScreen extends Component {
           onChangeText={this.handleChange('phoneNumber')}
         >
         </TextInput>
+        <Text>Выберите город..</Text>
+        <Picker
+          selectedValue={this.state.selectedCity}
+          style={styles.input}
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({ selectedCity: itemValue })
+          }>
+          {
+            cities.map((item, key) => (
+              <Picker.Item label={item.name} value={item.name} key={key} />)
+            )
+          }
+        </Picker>
         <Text>Выберите марку автомобиля..</Text>
         <Picker
           selectedValue={this.state.selectedBrand}
@@ -180,8 +202,8 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   button: {
-    padding: 10,
+    padding: 15,
     backgroundColor: '#486d9e',
-    borderRadius: 5
+    borderRadius: 5,
   }
 });

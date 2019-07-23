@@ -13,9 +13,12 @@ export default class ProfileScreen extends Component {
   render() {
     return (
       <View>
-        <Text>Profile Screen</Text>
+        <Text>Профиль</Text>
         <Text>
           {User.phoneNumber}
+        </Text>
+        <Text>
+          {User.city}
         </Text>
         <TouchableOpacity onPress={this._logOut}>
           <Text>Выйти</Text>

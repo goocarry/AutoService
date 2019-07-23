@@ -4,6 +4,7 @@ import { brands } from '../data/brand_db';
 import firebase from 'react-native-firebase';
 import ItemComponent from '../components/ItemComponent';
 import Separator from '../components/Separator';
+import User from '../User';
 
 
 export default class ServiceCardScreen extends Component {
@@ -15,9 +16,8 @@ export default class ServiceCardScreen extends Component {
   }
 
   static navigationOptions = {
-    title: 'Сервисная карта авто'
+    title: 'История обслуживания'
   }
-
 
   componentDidMount() {
     this.readUserData();
@@ -33,11 +33,13 @@ export default class ServiceCardScreen extends Component {
   */
 
   readUserData() {
-    firebase.database().ref('repairList/').on('value', snapshot => {
+    firebase.database().ref(User.city + '/' + User.phoneNumber + '/repairList/').on('value', snapshot => {
       //console.log(snapshot.val())
       //alert(JSON.stringify(snapshot.val()))
-      alert(JSON.stringify(Object.keys(snapshot.val())));
+      //alert(JSON.stringify(Object.keys(snapshot.val())));
       let data = snapshot.val();
+
+      //TODO обработчик if null, т.к. Object.values не может в null
       let items = Object.values(data);
       this.setState({ items });
     })
@@ -79,14 +81,6 @@ export default class ServiceCardScreen extends Component {
               <Text style={styles.btnTextAdd}>Добавить запись</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.buttonContainerDelete}>
-            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('RepairAdding')}>
-              <Text style={styles.btnTextDelete}>Удалить запись</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.historyTextView}>
-          <Text style={styles.historyText}>История обслуживания</Text>
         </View>
         <FlatList
           data={this.state.items}
@@ -180,24 +174,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: 'white',
   },
-  historyTextView: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: 20,
-    marginRight: 20,
-    paddingTop: 20,
-    borderRadius: 2,
-  },
-  historyText: {
-    fontSize: 20,
-    color: '#486d9e',
-  },
   buttonContainerAdd: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonContainerDelete: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',

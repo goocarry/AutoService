@@ -16,7 +16,11 @@ export default class AuthLoadingScreen extends Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
-    User.phoneNumber = await AsyncStorage.getItem('userPhone');
+    //User.phoneNumber = await AsyncStorage.getItem('userPhone');
+
+    Promise.all([User.phoneNumber = await AsyncStorage.getItem('userPhone'),
+    User.city = await AsyncStorage.getItem('city')]);
+    
     this.props.navigation.navigate(User.phoneNumber ? 'App' : 'Auth');
   };
 
